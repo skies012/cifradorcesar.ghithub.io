@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #000000;
+    overflow: hidden;
+}
+
+.navbar {
+    background-color : #0f0f0e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-icon{
+    display: flex;
+    align-items: center;
+}
+
+.icon-billar{
+    margin-right: 8px;
+}
+
+.icon-text {
+    color: white;
+    font-size: 18px;
+}
+
+.menu-toggle{
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    display: none; /*Oculto en pantallas grandes*/
+}
+
+.navbar-menu{
+    list-style: none;
+    display: flex;
+}
+
+.navbar-menu li{
+    position: relative;
+    margin: 0 15px;
+}
+
+.navbar-menu a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-menu a::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: rgb(92, 161, 239);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s, transform 0.3s ease;
+}
+
+.navbar-menu a:hover::after{
+    width: 100%;
+    transform: translateX(0); /*Subraya el enlace cuando se pasa el mouse*/
+}
+
+.navbar-menu a:not(:hover)::after{
+    transform: translateX(-100%);
+}
+
+/*Diseño Responsive*/
+@media (max-width: 768px){
+    .menu-toggle{
+        display: block; /* Mostrar el botón hamburguesa */
+    }
+}
+
+.navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #0f0f0e;
+    border-radius: 8px;
+    width: 200px;
+}
+
+.navbar-menu.active{
+    display: flex;
+}
+
+.navbar-menu li{
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Restaurar estilo de escritorio al ampliar la pantalla */
+@media (min-width: 769px) {
+    .navbar-menu {
+      display: flex !important; /* Asegurarse de que el menú sea visible */
+      flex-direction: row;
+      position: static;
+      width: auto;
+    }
+  }
+
+  .navbar-menu li{
+    margin: 0 20px;
+  }
+
+  /*---------------------------------Contenedor de las imagenes--------------------------------------*/
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background: #4585f3;
+    box-shadow: 0 30px 50px #6676ea;
+}
+
+.container .slide .item {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #000000;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.slide .item:nth-child(1),
+.slide .item:nth-child(2){
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide .item:nth-child(3){
+    left: 50%;
+}
+.slide .item:nth-child(4){
+    left: calc(50% + 220px);
+}
+.slide .item:nth-child(5){
+    left: calc(50% + 440px);
+}
+
+/*Si n= 0,1,2,3.....*/
+.slide .item:nth-child(n+ 6){
+    left: calc(50% + 660px);
+    opacity: 0;
+}
+
+.item .content{
+    position: absolute;
+    top: 50%;
+    left: 30px; /* Cambiado a 0 para que empiece en el borde izquierdo del contenedor padre */
+    width: 300px;
+    text-align: left;
+    color: #403c3c;
+    transform: translate(0, -50%); /* Ajusta para centrar verticalmente */
+    font-family: system-ui;
+    display: none;
+}
+
+.slide .item:nth-child(2) .content{
+    display: block;
+}
+
+/* Asegúrate de incluir la fuente "Cantique" */
+@font-face {
+    font-family: 'godoRounded';
+    src: url('/tipografias/godoRounded\ L.ttf') format('truetype'); /* Ajusta la ruta según la ubicación del archivo */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.content .name {
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: whitesmoke; /* Cambiado a color negro */
+    font-family: 'godoRounded'; /* Aplicar la fuente Cantique */
+    opacity: 0;
+    animation: animate 1s ease-in-out 1 forwards;
+}
+
+.content .des{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: whitesmoke;
+    font-family: 'godoRounded';
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+}
+
+.content .button{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+}
+
+.content button{
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding: 10px 20px;
+    border: 1px solid #fff; /* Borde fino de color blanco */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto en blanco */
+    border-radius: 5px; /* Bordes redondeados para un estilo más elegante */
+    cursor: pointer;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+    transition: 0.3s; /* Transición suave para el hover */
+}
+
+/* Efecto hover para cambiar color */
+.content button:hover {
+    background-color: #333; /* Cambia ligeramente el fondo al pasar el ratón */
+    color: #ddd;
+    border-color: #ddd; /* Cambia el color del borde en hover */
+}
+
+@keyframes animate {
+    from{
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+    }
+}
+
+.content .button {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los elementos dentro de .button */
+    gap: 20px; /* Espacio horizontal entre los botones */
+    padding: 10px 20px;
+}
+
+.content .button .prev,
+.content .button .next {
+    cursor: pointer;
+    font-size: 24px; /* Ajusta el tamaño de los iconos según tu preferencia */
+    color: #000; /* Cambia el color de los iconos si es necesario */
+    transition: 0.3s;
+}
+
+.content .button .prev:hover,
+.content .button .next:hover {
+    color: #ababaa; /* Cambia el color al pasar el mouse por encima */
+}
+
+

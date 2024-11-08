@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    background-color : #0f0f0e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-icon{
+    display: flex;
+    align-items: center;
+}
+
+.icon-billar{
+    margin-right: 8px;
+}
+
+.icon-text {
+    color: white;
+    font-size: 18px;
+}
+
+.menu-toggle{
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    display: none; /*Oculto en pantallas grandes*/
+}
+
+.navbar-menu{
+    list-style: none;
+    display: flex;
+}
+
+.navbar-menu li{
+    position: relative;
+    margin: 0 15px;
+}
+
+.navbar-menu a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-menu a::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: rgb(92, 161, 239);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s, transform 0.3s ease;
+}
+
+.navbar-menu a:hover::after{
+    width: 100%;
+    transform: translateX(0); /*Subraya el enlace cuando se pasa el mouse*/
+}
+
+.navbar-menu a:not(:hover)::after{
+    transform: translateX(-100%);
+}
+
+/*Diseño Responsive*/
+@media (max-width: 768px){
+    .menu-toggle{
+        display: block; /* Mostrar el botón hamburguesa */
+    }
+}
+
+.navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #0f0f0e;
+    border-radius: 8px;
+    width: 200px;
+}
+
+.navbar-menu.active{
+    display: flex;
+}
+
+.navbar-menu li{
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Restaurar estilo de escritorio al ampliar la pantalla */
+@media (min-width: 769px) {
+    .navbar-menu {
+      display: flex !important; /* Asegurarse de que el menú sea visible */
+      flex-direction: row;
+      position: static;
+      width: auto;
+    }
+  }
+
+  .navbar-menu li{
+    margin: 0 20px;
+  }
